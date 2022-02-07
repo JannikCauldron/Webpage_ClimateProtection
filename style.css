@@ -16,9 +16,6 @@ body {
 }
 
 @keyframes highlight_nav_links {
-    from {
-        color: white;
-    }
     to {
         color:  #e0f53b;
     }
