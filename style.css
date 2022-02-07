@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+}
+
+.navbar-links {
+    text-decoration: none;
+    color: white;
+    font-size: 18pt;
+}
+
+.navbar-links:hover {
+    animation-name: highlight_nav_links;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes highlight_nav_links {
+    from {
+        color: white;
+    }
+    to {
+        color:  #e0f53b;
+    }
+}
+
+#navbar {
+    position: sticky;
+    top: 1vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    width: 98vw;
+    margin: 1vw 1vw;
+    border-radius: 20px;
+    background: linear-gradient(20deg, #41ff2e 0%,  #2eaa22 100%);
+}
+
+#navbar-icon {
+    margin: 0 5vw;
+    height: 100%;
+}
+
+#navbar-icon-image {
+    max-height: 100%;
+}
+
+#navbar-icon-image:hover {
+    animation-name: animal_move;
+    animation-duration: 0.3s;
+    animation-iteration-count: 1;
+}
+
+@keyframes animal_move {
+    33% {
+        transform: translateX(5px);
+    }
+    66% {
+        transform: translateX(-5px);
+    }
+}
+
+#navbar-links-group {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 8vw;
+}
+
+
+@media screen and (min-width: 1280px) {
+    #navbar-links-group {
+        width: 40vw;
+    }
+}
+
+@media screen and (max-width: 1279px) {
+    #navbar-links-group {
+        width: 40vw;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #navbar-links-group {
+        width: 50vw;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .navbar-links {
+        font-size: 14pt;
+    }
+}
