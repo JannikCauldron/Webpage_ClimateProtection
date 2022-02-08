@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
-    background:#c2ff99;
+    background:#cdffac;
 }
 
 .navbar-links {
@@ -14,6 +14,30 @@ body {
     animation-name: highlight_nav_links;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
+}
+
+.info-tile {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 33%;
+    padding-bottom: 2%;
+}
+
+.info-tile p {
+    padding: 5%;
+}
+
+.info-tile-img {
+    max-height: 100%;
+    max-width: 40%;
+    object-fit: contain;
+}
+
+.info-source {
+    text-decoration: none;
+    color:rgb(111, 190, 255);
 }
 
 @keyframes highlight_nav_links {
@@ -82,6 +106,12 @@ body {
 #content-start h1 {
     margin-bottom: 0;
     font-style: italic;
+}
+
+#content-info {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 
