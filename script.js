@@ -21,16 +21,69 @@ function resetAnswerButton(button)
 {
     button.style["background-color"] = "rgb(236, 236, 236)";
     button.classList.add("button-hover");
+    fadeOut();
 }
 
 function setNewQuestion(questionNumber) 
 {
     quiz_model.firstElementChild.textContent = quiz_data[questionNumber]["question"];
     
+    answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC].style.opacity = 0;
+    answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_BD].style.opacity = 0;
+    answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_AC].style.opacity = 0;
+    answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_BD].style.opacity = 0;
+
     answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC].innerText = quiz_data[questionNumber]["answer_1"];
     answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_BD].innerText = quiz_data[questionNumber]["answer_2"];
     answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_AC].innerText = quiz_data[questionNumber]["answer_3"];
     answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_BD].innerText = quiz_data[questionNumber]["answer_4"];
+    fadeIn();
+}
+
+function fadeIn()
+{
+    setInterval(setOpacityFadeIn, 100);
+}
+
+function fadeOut()
+{
+    intervalIDFadeOut = setInterval(setOpacityFadeOut, 90);
+}
+
+function setOpacityFadeIn()
+{
+    let opacity = Number(answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC].style.opacity);
+    if (opacity < 1)
+    {
+        opacity += 0.1;
+        quiz_model.firstElementChild.style.opacity = opacity;
+        answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC].style.opacity = opacity;
+        answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_BD].style.opacity = opacity;
+        answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_AC].style.opacity = opacity;
+        answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_BD].style.opacity = opacity;
+    } 
+    else
+    {
+        clearInterval();
+    }
+}
+
+function setOpacityFadeOut()
+{
+    let opacity = Number(answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC].style.opacity);
+    if (opacity > 0)
+    {
+        opacity -= 0.25;
+        quiz_model.firstElementChild.style.opacity = opacity;
+        answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC].style.opacity = opacity;
+        answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_BD].style.opacity = opacity;
+        answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_AC].style.opacity = opacity;
+        answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_BD].style.opacity = opacity;
+    } 
+    else
+    {
+        clearInterval(intervalIDFadeOut);
+    }
 }
 
 function buttonClicked() 
@@ -46,7 +99,8 @@ function buttonClicked()
     {
         this.style["background-color"] = "red";
     }
-    setTimeout(resetAnswerButton, 1000, this);
+    //fadeOut anim has to fit in this time slot
+    setTimeout(resetAnswerButton, 500, this);
     setTimeout(setNewQuestion, 1000, ++questionCnt);
 }
 
@@ -58,6 +112,7 @@ const BUTTON_ROW_AB = 0;
 const BUTTON_ROW_CD = 1;
 const BUTTON_COL_AC = 1;
 const BUTTON_COL_BD = 3;
+let intervalIDFadeOut;
 let questionCnt = 0;
 
 setNewQuestion(questionCnt);
