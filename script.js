@@ -37,6 +37,8 @@ function setNewQuestion(questionNumber)
     answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_BD].innerText = quiz_data[questionNumber]["answer_2"];
     answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_AC].innerText = quiz_data[questionNumber]["answer_3"];
     answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_BD].innerText = quiz_data[questionNumber]["answer_4"];
+
+    document.getElementById('quiz-progress').innerText = (questionNumber + 1) + "/" + quiz_data.length;
     fadeIn();
 }
 
