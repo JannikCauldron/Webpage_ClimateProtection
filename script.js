@@ -32,8 +32,9 @@ const buttons = [ answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC],
                     answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_BD]]
 let intervalIDFadeOut;
 let questionCnt = 0;
+let questionWordFeedback = document.getElementById('quiz-evaluation');
 
-setNewQuestion(questionCnt);
+renderNewQuestionSection(questionCnt);
 for(const but of buttons)
 {
     but.onclick = buttonClicked;

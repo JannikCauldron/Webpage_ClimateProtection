@@ -171,6 +171,10 @@ body {
     margin: 3% 0;
 }
 
+#quiz-evaluation {
+    visibility: hidden;
+}
+
 
 @media screen and (min-width: 1280px) {
     #navbar-links-group {

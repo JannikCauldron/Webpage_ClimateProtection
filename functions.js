@@ -1,14 +1,15 @@
-function resetAllButtons(button)
+function resetQuestionSection(button)
 {
     for (const but of buttons)
     {
         but.style["background-color"] = "rgb(236, 236, 236)";
     }
     button.classList.add("button-hover");
+
     fadeOut();
 }
 
-function setNewQuestion(questionNumber) 
+function renderNewQuestionSection(questionNumber) 
 {
     quiz_model.firstElementChild.textContent = quiz_data[questionNumber]["question"];
     
@@ -29,6 +30,7 @@ function setNewQuestion(questionNumber)
 function fadeIn()
 {
     setInterval(setOpacityFadeIn, 100);
+    questionWordFeedback.style["visibility"] = "hidden";
 }
 
 function fadeOut()
@@ -80,6 +82,8 @@ function buttonClicked()
     if (this.innerText == quiz_data[questionCnt][correctAnswer])
     {
         this.style["background-color"] = "green";
+
+        setWordFeedback("RICHTIG", "green");
     }
     else
     {
@@ -91,8 +95,16 @@ function buttonClicked()
                 but.style["background-color"] = "green";
             }
         }
+
+        setWordFeedback("FALSCH", "red");
     }
     //fadeOut anim has to fit in this time slot
-    setTimeout(resetAllButtons, 500, this);
-    setTimeout(setNewQuestion, 1000, ++questionCnt);
+    setTimeout(resetQuestionSection, 500, this);
+    setTimeout(renderNewQuestionSection, 1000, ++questionCnt);
+}
+
+function setWordFeedback(word, color) {
+    questionWordFeedback.innerText = word;
+    questionWordFeedback.style["color"] = color;
+    questionWordFeedback.style["visibility"] = "visible";
 }
