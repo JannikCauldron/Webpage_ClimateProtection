@@ -1,6 +1,9 @@
-function resetAnswerButton(button)
+function resetAllButtons(button)
 {
-    button.style["background-color"] = "rgb(236, 236, 236)";
+    for (const but of buttons)
+    {
+        but.style["background-color"] = "rgb(236, 236, 236)";
+    }
     button.classList.add("button-hover");
     fadeOut();
 }
@@ -81,8 +84,15 @@ function buttonClicked()
     else
     {
         this.style["background-color"] = "red";
+        for (const but of buttons)
+        {
+            if (but.innerText == quiz_data[questionCnt][correctAnswer])
+            {
+                but.style["background-color"] = "green";
+            }
+        }
     }
     //fadeOut anim has to fit in this time slot
-    setTimeout(resetAnswerButton, 500, this);
+    setTimeout(resetAllButtons, 500, this);
     setTimeout(setNewQuestion, 1000, ++questionCnt);
 }
