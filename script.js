@@ -1,3 +1,5 @@
+//TODO Feedback, welche Frage ist richtig, wenn falsch ausgewählt
+
 const quiz_data = [
     {
         "question": "Frage",
@@ -17,96 +19,6 @@ const quiz_data = [
     }
 ]
 
-function resetAnswerButton(button)
-{
-    button.style["background-color"] = "rgb(236, 236, 236)";
-    button.classList.add("button-hover");
-    fadeOut();
-}
-
-function setNewQuestion(questionNumber) 
-{
-    quiz_model.firstElementChild.textContent = quiz_data[questionNumber]["question"];
-    
-    answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC].style.opacity = 0;
-    answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_BD].style.opacity = 0;
-    answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_AC].style.opacity = 0;
-    answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_BD].style.opacity = 0;
-
-    answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC].innerText = quiz_data[questionNumber]["answer_1"];
-    answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_BD].innerText = quiz_data[questionNumber]["answer_2"];
-    answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_AC].innerText = quiz_data[questionNumber]["answer_3"];
-    answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_BD].innerText = quiz_data[questionNumber]["answer_4"];
-
-    document.getElementById('quiz-progress').innerText = (questionNumber + 1) + "/" + quiz_data.length;
-    fadeIn();
-}
-
-function fadeIn()
-{
-    setInterval(setOpacityFadeIn, 100);
-}
-
-function fadeOut()
-{
-    intervalIDFadeOut = setInterval(setOpacityFadeOut, 90);
-}
-
-function setOpacityFadeIn()
-{
-    let opacity = Number(answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC].style.opacity);
-    if (opacity < 1)
-    {
-        opacity += 0.1;
-        quiz_model.firstElementChild.style.opacity = opacity;
-        answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC].style.opacity = opacity;
-        answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_BD].style.opacity = opacity;
-        answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_AC].style.opacity = opacity;
-        answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_BD].style.opacity = opacity;
-    } 
-    else
-    {
-        clearInterval();
-    }
-}
-
-function setOpacityFadeOut()
-{
-    let opacity = Number(answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC].style.opacity);
-    if (opacity > 0)
-    {
-        opacity -= 0.25;
-        quiz_model.firstElementChild.style.opacity = opacity;
-        answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC].style.opacity = opacity;
-        answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_BD].style.opacity = opacity;
-        answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_AC].style.opacity = opacity;
-        answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_BD].style.opacity = opacity;
-    } 
-    else
-    {
-        clearInterval(intervalIDFadeOut);
-    }
-}
-
-function buttonClicked() 
-{
-    this.classList.remove("button-hover");
-
-    const correctAnswer = quiz_data[questionCnt]["rightAnswer"];
-    if (this.innerText == quiz_data[questionCnt][correctAnswer])
-    {
-        this.style["background-color"] = "green";
-    }
-    else
-    {
-        this.style["background-color"] = "red";
-    }
-    //fadeOut anim has to fit in this time slot
-    setTimeout(resetAnswerButton, 500, this);
-    setTimeout(setNewQuestion, 1000, ++questionCnt);
-}
-
-
 const quiz_model = document.getElementById('content-quiz');
 const answer_model = document.getElementsByClassName('answer-group');
 
@@ -114,11 +26,15 @@ const BUTTON_ROW_AB = 0;
 const BUTTON_ROW_CD = 1;
 const BUTTON_COL_AC = 1;
 const BUTTON_COL_BD = 3;
+const buttons = [ answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC],
+                    answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_BD],
+                    answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_AC],
+                    answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_BD]]
 let intervalIDFadeOut;
 let questionCnt = 0;
 
 setNewQuestion(questionCnt);
-answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC].onclick = buttonClicked;
-answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_BD].onclick = buttonClicked;
-answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_AC].onclick = buttonClicked;
-answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_BD].onclick = buttonClicked;
+for(const but of buttons)
+{
+    but.onclick = buttonClicked;
+}
