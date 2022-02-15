@@ -171,8 +171,12 @@ body {
     margin: 3% 0;
 }
 
-#quiz-evaluation {
+#quiz-word-evaluation {
     visibility: hidden;
+}
+
+#quiz-evaluation {
+    display: none;
 }
 
 

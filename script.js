@@ -29,10 +29,12 @@ const BUTTON_COL_BD = 3;
 const buttons = [ answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC],
                     answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_BD],
                     answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_AC],
-                    answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_BD]]
+                    answer_model[BUTTON_ROW_CD].childNodes[BUTTON_COL_BD]];
+let questionSectionHeight;
 let intervalIDFadeOut;
 let questionCnt = 0;
-let questionWordFeedback = document.getElementById('quiz-evaluation');
+let questionWordFeedback = document.getElementById('quiz-word-evaluation');
+let questionEvaluation_model = document.getElementById('quiz-evaluation');
 
 renderNewQuestionSection(questionCnt);
 for(const but of buttons)

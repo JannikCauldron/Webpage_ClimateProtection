@@ -1,3 +1,4 @@
+//TODO: korrekte groesse einstellen; fadein/out schoener machen; Code aufraeumen; korrekte Zahlen verwenden.
 function resetQuestionSection(button)
 {
     for (const but of buttons)
@@ -11,25 +12,51 @@ function resetQuestionSection(button)
 
 function renderNewQuestionSection(questionNumber) 
 {
-    quiz_model.firstElementChild.textContent = quiz_data[questionNumber]["question"];
-    
-    for(const but of buttons)
+    if (questionNumber < quiz_data.length)
     {
-        but.style.opacity = 0;
-    }
-    let cnt = 1;
-    for(const but of buttons)
-    {
-        but.innerText = quiz_data[questionNumber]["answer_" + (cnt++)];
-    }
+        quiz_model.firstElementChild.textContent = quiz_data[questionNumber]["question"];
+        
+        for(const but of buttons)
+        {
+            but.style.opacity = 0;
+        }
+        let cnt = 1;
+        for(const but of buttons)
+        {
+            but.innerText = quiz_data[questionNumber]["answer_" + (cnt++)];
+        }
 
-    document.getElementById('quiz-progress').innerText = (questionNumber + 1) + "/" + quiz_data.length;
-    fadeIn();
+        document.getElementById('quiz-progress').innerText = (questionNumber + 1) + "/" + quiz_data.length;
+        fadeIn([quiz_model.firstElementChild].concat(buttons));
+
+        let elem = window.getComputedStyle(document.getElementById('content-quiz'), null);
+        //console.log(elem.getPropertyValue("height"));
+        questionSectionHeight = elem.getPropertyValue("height");
+        //console.log(questionSectionHeight);
+    }
+    else
+    {
+        for (let i = 0; i < 4; i++)
+        {
+            quiz_model.children[i].style["display"] = "none";
+        }
+        //console.log(questionSectionHeight);
+        questionEvaluation_model.style["display"] = "block";
+        fadeIn([questionEvaluation_model]);
+    }
+    //console.log(document.getElementById('content-quiz'));
 }
 
-function fadeIn()
+function setQuizSectionHeight()
 {
-    setInterval(setOpacityFadeIn, 100);
+    document.getElementById('content-quiz').style["height"] = questionSectionHeight;
+    //console.log("Neue Hoehe");
+    //console.log(document.getElementById('content-quiz').style["height"]);
+}
+
+function fadeIn(elements)
+{
+    setInterval(setOpacityFadeIn, 100, elements);
     questionWordFeedback.style["visibility"] = "hidden";
 }
 
@@ -38,16 +65,21 @@ function fadeOut()
     intervalIDFadeOut = setInterval(setOpacityFadeOut, 90);
 }
 
-function setOpacityFadeIn()
+function setOpacityFadeIn(elements)
 {
-    let opacity = Number(buttons[0].style.opacity);
+    //let opacity = Number(buttons[0].style.opacity);
+    let opacity = Number(elements[0].style.opacity);
     if (opacity < 1)
     {
         opacity += 0.1;
-        quiz_model.firstElementChild.style.opacity = opacity;
-        for (const but of buttons)
+        //quiz_model.firstElementChild.style.opacity = opacity;
+        /*for (const but of buttons)
         {
             but.style.opacity = opacity;
+        }*/
+        for (const el of elements)
+        {
+            el.style.opacity = opacity;
         }
     } 
     else
@@ -101,6 +133,25 @@ function buttonClicked()
     //fadeOut anim has to fit in this time slot
     setTimeout(resetQuestionSection, 500, this);
     setTimeout(renderNewQuestionSection, 1000, ++questionCnt);
+    setTimeout(setQuizSectionHeight, 3000);   
+    /*
+    if (questionCnt + 1 < quiz_data.length)
+    {
+        //fadeOut anim has to fit in this time slot
+        setTimeout(resetQuestionSection, 500, this);
+        setTimeout(renderNewQuestionSection, 1000, ++questionCnt);   
+    }
+    else
+    {
+        console.log(quiz_model);
+        //fadeOut();
+        for (let i = 0; i < 4; i++)
+        {
+            quiz_model.children[i].style["display"] = "none";
+        }
+        questionEvaluation_model.style["display"] = "block";
+    }
+    */
 }
 
 function setWordFeedback(word, color) {
