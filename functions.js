@@ -1,4 +1,4 @@
-//TODO: korrekte groesse einstellen; fadein/out schoener machen; Code aufraeumen; korrekte Zahlen verwenden.
+//TODO: fadein/out schoener machen; Code aufraeumen; korrekte Zahlen verwenden.
 function resetQuestionSection(button)
 {
     for (const but of buttons)
@@ -41,7 +41,8 @@ function renderNewQuestionSection(questionNumber)
             quiz_model.children[i].style["display"] = "none";
         }
         //console.log(questionSectionHeight);
-        questionEvaluation_model.style["display"] = "block";
+        questionEvaluation_model.style["display"] = "flex";
+        quiz_model.style["justifyContent"] = "center";
         fadeIn([questionEvaluation_model]);
     }
     //console.log(document.getElementById('content-quiz'));
@@ -133,7 +134,7 @@ function buttonClicked()
     //fadeOut anim has to fit in this time slot
     setTimeout(resetQuestionSection, 500, this);
     setTimeout(renderNewQuestionSection, 1000, ++questionCnt);
-    setTimeout(setQuizSectionHeight, 3000);   
+    setTimeout(setQuizSectionHeight, 2000);   
     /*
     if (questionCnt + 1 < quiz_data.length)
     {

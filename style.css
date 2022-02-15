@@ -177,6 +177,7 @@ body {
 
 #quiz-evaluation {
     display: none;
+    flex-direction: column;
 }
 
 
