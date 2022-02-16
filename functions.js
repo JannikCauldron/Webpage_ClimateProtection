@@ -1,4 +1,4 @@
-//TODO: fadein/out schoener machen; Code aufraeumen
+//TODO: Code aufraeumen
 function resetQuestionSection(button)
 {
     for (const but of buttons)
@@ -16,46 +16,63 @@ function renderNewQuestionSection(questionNumber)
     {
         quiz_model.firstElementChild.textContent = quiz_data[questionNumber]["question"];
         
-        for(const but of buttons)
-        {
-            but.style.opacity = 0;
-        }
-        let cnt = 1;
-        for(const but of buttons)
-        {
-            but.innerText = quiz_data[questionNumber]["answer_" + (cnt++)];
-        }
+        resetButtonOpacity();
+        setNextButtonText(questionNumber);
 
         document.getElementById('quiz-progress').innerText = (questionNumber + 1) + "/" + quiz_data.length;
         fadeIn([quiz_model.firstElementChild].concat(buttons));
 
-        let elem = window.getComputedStyle(document.getElementById('content-quiz'), null);
-        //console.log(elem.getPropertyValue("height"));
-        questionSectionHeight = elem.getPropertyValue("height");
-        //console.log(questionSectionHeight);
+        updateQuizSectionHeight();
     }
     else
     {
-        for (let i = 0; i < 4; i++)
-        {
-            quiz_model.children[i].style["display"] = "none";
-        }
-        console.log(document.getElementById('rightAnswerCounter'));
-        document.getElementById('rightAnswerCounter').innerText = rightAnswerCnt;
-        document.getElementById('questionCounter').innerText = quiz_data.length;
-        //console.log(questionSectionHeight);
-        questionEvaluation_model.style["display"] = "flex";
-        quiz_model.style["justifyContent"] = "center";
-        fadeIn([questionEvaluation_model]);
+        renderEvaluationSection();
     }
-    //console.log(document.getElementById('content-quiz'));
+}
+
+function renderEvaluationSection() {
+    for (let i = 0; i < 4; i++) {
+        quiz_model.children[i].style["display"] = "none";
+    }
+    
+    if (rightAnswerCnt / quiz_data.length >= 0.5)
+    {
+        document.getElementById('evaluation-header').innerText = "Glückwunsch";
+    }
+    else
+    {
+        document.getElementById('evaluation-header').innerText = "Schade";
+    }
+
+    document.getElementById('rightAnswerCounter').innerText = rightAnswerCnt;
+    document.getElementById('questionCounter').innerText = quiz_data.length;
+
+    questionEvaluation_model.style["display"] = "flex";
+    quiz_model.style["justifyContent"] = "center";
+    fadeIn([questionEvaluation_model]);
+}
+
+function resetButtonOpacity() {
+    for (const but of buttons) {
+        but.style.opacity = 0;
+    }
+}
+
+function setNextButtonText(questionNumber) {
+    let cnt = 1;
+    for (const but of buttons) {
+        but.innerText = quiz_data[questionNumber]["answer_" + (cnt++)];
+    }
+}
+
+function updateQuizSectionHeight() {
+    let elem = window.getComputedStyle(document.getElementById('content-quiz'), null);
+    questionSectionHeight = elem.getPropertyValue("height");
 }
 
 function setQuizSectionHeight()
 {
     document.getElementById('content-quiz').style["height"] = questionSectionHeight;
-    //console.log("Neue Hoehe");
-    //console.log(document.getElementById('content-quiz').style["height"]);
 }
 
 function fadeIn(elements)
@@ -73,16 +90,10 @@ function fadeOut()
 
 function setOpacityFadeIn(elements)
 {
-    //let opacity = Number(buttons[0].style.opacity);
     let opacity = Number(elements[0].style.opacity);
     if (opacity < 1)
     {
         opacity += 0.1;
-        //quiz_model.firstElementChild.style.opacity = opacity;
-        /*for (const but of buttons)
-        {
-            but.style.opacity = opacity;
-        }*/
         for (const el of elements)
         {
             el.style.opacity = opacity;
@@ -119,47 +130,34 @@ function buttonClicked()
     const correctAnswer = quiz_data[questionCnt]["rightAnswer"];
     if (this.innerText == quiz_data[questionCnt][correctAnswer])
     {
-        rightAnswerCnt++;
-        this.style["background-color"] = "green";
-
-        setWordFeedback("RICHTIG", "green");
+        rightAnswerFeedback(this);
     }
     else
     {
-        this.style["background-color"] = "red";
-        for (const but of buttons)
-        {
-            if (but.innerText == quiz_data[questionCnt][correctAnswer])
-            {
-                but.style["background-color"] = "green";
-            }
-        }
-
-        setWordFeedback("FALSCH", "red");
+        wrongAnswerFeedback(this, correctAnswer);
     }
     //fadeOut anim has to fit in this time slot
-    //console.log(questionCnt);
     setTimeout(resetQuestionSection, 500, this);
     setTimeout(renderNewQuestionSection, 1500, ++questionCnt);
     setTimeout(setQuizSectionHeight, 2500);   
-    /*
-    if (questionCnt + 1 < quiz_data.length)
-    {
-        //fadeOut anim has to fit in this time slot
-        setTimeout(resetQuestionSection, 500, this);
-        setTimeout(renderNewQuestionSection, 1000, ++questionCnt);   
-    }
-    else
-    {
-        console.log(quiz_model);
-        //fadeOut();
-        for (let i = 0; i < 4; i++)
-        {
-            quiz_model.children[i].style["display"] = "none";
+}
+
+function rightAnswerFeedback(button) {
+    rightAnswerCnt++;
+    button.style["background-color"] = "green";
+
+    setWordFeedback("RICHTIG", "green");
+}
+
+function wrongAnswerFeedback(button, correctAnswer) {
+    button.style["background-color"] = "red";
+    for (const but of buttons) {
+        if (but.innerText == quiz_data[questionCnt][correctAnswer]) {
+            but.style["background-color"] = "green";
         }
-        questionEvaluation_model.style["display"] = "block";
     }
-    */
+
+    setWordFeedback("FALSCH", "red");
 }
 
 function setWordFeedback(word, color) {
