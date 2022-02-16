@@ -42,3 +42,7 @@ for(const but of buttons)
 {
     but.onclick = buttonClicked;
 }
+
+document.getElementById('myButton').onclick = function() {
+    quiz_model.classList.toggle('fade');
+}
