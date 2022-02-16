@@ -1,4 +1,4 @@
-//TODO: fadein/out schoener machen; Code aufraeumen; korrekte Zahlen verwenden.
+//TODO: fadein/out schoener machen; Code aufraeumen
 function resetQuestionSection(button)
 {
     for (const but of buttons)
@@ -60,12 +60,14 @@ function setQuizSectionHeight()
 
 function fadeIn(elements)
 {
+    console.log("fadeIn");
     setInterval(setOpacityFadeIn, 100, elements);
     questionWordFeedback.style["visibility"] = "hidden";
 }
 
 function fadeOut()
 {
+    console.log("fadeOut");
     intervalIDFadeOut = setInterval(setOpacityFadeOut, 90);
 }
 
@@ -97,7 +99,7 @@ function setOpacityFadeOut()
     let opacity = Number(buttons[0].style.opacity);
     if (opacity > 0)
     {
-        opacity -= 0.25;
+        opacity -= 0.15;
         quiz_model.firstElementChild.style.opacity = opacity;
         for (const but of buttons)
         {
@@ -136,9 +138,10 @@ function buttonClicked()
         setWordFeedback("FALSCH", "red");
     }
     //fadeOut anim has to fit in this time slot
+    //console.log(questionCnt);
     setTimeout(resetQuestionSection, 500, this);
-    setTimeout(renderNewQuestionSection, 1000, ++questionCnt);
-    setTimeout(setQuizSectionHeight, 2000);   
+    setTimeout(renderNewQuestionSection, 1500, ++questionCnt);
+    setTimeout(setQuizSectionHeight, 2500);   
     /*
     if (questionCnt + 1 < quiz_data.length)
     {
