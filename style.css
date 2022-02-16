@@ -75,6 +75,13 @@ body {
     animation-fill-mode: forwards;
 }
 
+.help-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2vh;
+}
+
 @keyframes highlight_button {
     to {
         background-color:  #e0f53b;
@@ -187,6 +194,20 @@ body {
     flex-direction: column;
 }
 
+#help-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 12% 0;
+}
+
+#help-content {
+    display: flex;
+    padding-top: 10%;
+    gap: 20vw;
+}
+
 
 @media screen and (min-width: 1280px) {
     #navbar-links-group {
@@ -240,5 +261,10 @@ body {
     #quiz-answer {
         gap: 3vh;
         width: 90vw;
+    }
+
+    #help-content {
+        flex-direction: column;
+        gap: 10vw;
     }
 }
