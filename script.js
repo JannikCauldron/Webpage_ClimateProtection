@@ -33,6 +33,7 @@ const buttons = [ answer_model[BUTTON_ROW_AB].childNodes[BUTTON_COL_AC],
 let questionSectionHeight;
 let intervalIDFadeOut;
 let questionCnt = 0;
+let rightAnswerCnt = 0;
 let questionWordFeedback = document.getElementById('quiz-word-evaluation');
 let questionEvaluation_model = document.getElementById('quiz-evaluation');
 

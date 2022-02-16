@@ -40,6 +40,9 @@ function renderNewQuestionSection(questionNumber)
         {
             quiz_model.children[i].style["display"] = "none";
         }
+        console.log(document.getElementById('rightAnswerCounter'));
+        document.getElementById('rightAnswerCounter').innerText = rightAnswerCnt;
+        document.getElementById('questionCounter').innerText = quiz_data.length;
         //console.log(questionSectionHeight);
         questionEvaluation_model.style["display"] = "flex";
         quiz_model.style["justifyContent"] = "center";
@@ -114,6 +117,7 @@ function buttonClicked()
     const correctAnswer = quiz_data[questionCnt]["rightAnswer"];
     if (this.innerText == quiz_data[questionCnt][correctAnswer])
     {
+        rightAnswerCnt++;
         this.style["background-color"] = "green";
 
         setWordFeedback("RICHTIG", "green");
