@@ -139,7 +139,7 @@ function buttonClicked()
     //fadeOut anim has to fit in this time slot
     setTimeout(resetQuestionSection, 500, this);
     setTimeout(renderNewQuestionSection, 1500, ++questionCnt);
-    setTimeout(setQuizSectionHeight, 2500);   
+    setQuizSectionHeight();
 }
 
 function rightAnswerFeedback(button) {
