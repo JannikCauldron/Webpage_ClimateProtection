@@ -1,4 +1,3 @@
-//TODO: Code aufraeumen
 function resetQuestionSection(button)
 {
     for (const but of buttons)
@@ -6,8 +5,6 @@ function resetQuestionSection(button)
         but.style["background-color"] = "rgb(236, 236, 236)";
     }
     button.classList.add("button-hover");
-
-    fadeOut();
 }
 
 function renderNewQuestionSection(questionNumber) 
@@ -16,11 +13,10 @@ function renderNewQuestionSection(questionNumber)
     {
         quiz_model.firstElementChild.textContent = quiz_data[questionNumber]["question"];
         
-        resetButtonOpacity();
         setNextButtonText(questionNumber);
 
+        questionWordFeedback.style["visibility"] = "hidden";
         document.getElementById('quiz-progress').innerText = (questionNumber + 1) + "/" + quiz_data.length;
-        fadeIn([quiz_model.firstElementChild].concat(buttons));
 
         updateQuizSectionHeight();
     }
@@ -49,7 +45,6 @@ function renderEvaluationSection() {
 
     questionEvaluation_model.style["display"] = "flex";
     quiz_model.style["justifyContent"] = "center";
-    fadeIn([questionEvaluation_model]);
 }
 
 function resetButtonOpacity() {
@@ -66,61 +61,13 @@ function setNextButtonText(questionNumber) {
 }
 
 function updateQuizSectionHeight() {
-    let elem = window.getComputedStyle(document.getElementById('content-quiz'), null);
+    let elem = window.getComputedStyle(document.getElementById('fade'), null);
     questionSectionHeight = elem.getPropertyValue("height");
 }
 
 function setQuizSectionHeight()
 {
-    document.getElementById('content-quiz').style["height"] = questionSectionHeight;
-}
-
-function fadeIn(elements)
-{
-    console.log("fadeIn");
-    setInterval(setOpacityFadeIn, 100, elements);
-    questionWordFeedback.style["visibility"] = "hidden";
-}
-
-function fadeOut()
-{
-    console.log("fadeOut");
-    intervalIDFadeOut = setInterval(setOpacityFadeOut, 90);
-}
-
-function setOpacityFadeIn(elements)
-{
-    let opacity = Number(elements[0].style.opacity);
-    if (opacity < 1)
-    {
-        opacity += 0.1;
-        for (const el of elements)
-        {
-            el.style.opacity = opacity;
-        }
-    } 
-    else
-    {
-        clearInterval();
-    }
-}
-
-function setOpacityFadeOut()
-{
-    let opacity = Number(buttons[0].style.opacity);
-    if (opacity > 0)
-    {
-        opacity -= 0.15;
-        quiz_model.firstElementChild.style.opacity = opacity;
-        for (const but of buttons)
-        {
-            but.style.opacity = opacity;
-        }
-    } 
-    else
-    {
-        clearInterval(intervalIDFadeOut);
-    }
+    document.getElementById('fade').style["height"] = questionSectionHeight;
 }
 
 function buttonClicked() 
@@ -136,10 +83,17 @@ function buttonClicked()
     {
         wrongAnswerFeedback(this, correctAnswer);
     }
+    toggleFade();
+    setTimeout(toggleFade, 1300);
     //fadeOut anim has to fit in this time slot
-    setTimeout(resetQuestionSection, 500, this);
+    setTimeout(resetQuestionSection, 800, this);
     setTimeout(renderNewQuestionSection, 1500, ++questionCnt);
     setQuizSectionHeight();
+}
+
+function toggleFade()
+{
+    quiz_model.classList.toggle('fadeOut');
 }
 
 function rightAnswerFeedback(button) {

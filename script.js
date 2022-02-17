@@ -19,7 +19,7 @@ const quiz_data = [
     }
 ]
 
-const quiz_model = document.getElementById('content-quiz');
+const quiz_model = document.getElementById('fade');
 const answer_model = document.getElementsByClassName('answer-group');
 
 const BUTTON_ROW_AB = 0;
@@ -41,8 +41,4 @@ renderNewQuestionSection(questionCnt);
 for(const but of buttons)
 {
     but.onclick = buttonClicked;
-}
-
-document.getElementById('myButton').onclick = function() {
-    quiz_model.classList.toggle('fade');
 }
