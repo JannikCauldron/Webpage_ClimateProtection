@@ -4,6 +4,13 @@ body {
     background: linear-gradient(100deg, #beffb9 0%,  rgb(78, 255, 72) 100%);
 }
 
+footer {
+    display: flex;
+    justify-content: center;
+    padding: 1vh;
+    border-top: 1px solid rgba(119, 119, 119, 0.8);
+}
+
 .navbar-links {
     text-decoration: none;
     color: black;
@@ -241,6 +248,10 @@ body {
 @media screen and (max-width: 480px) {
     h1 {
         font-size: 16pt;
+    }
+
+    footer {
+        font-size: 10pt;
     }
 
     .navbar-links {
