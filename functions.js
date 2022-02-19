@@ -27,6 +27,7 @@ function renderNewQuestionSection(questionNumber)
 }
 
 function renderEvaluationSection() {
+    setQuizSectionHeight();
     for (let i = 0; i < 4; i++) {
         quiz_model.children[i].style["display"] = "none";
     }
@@ -88,7 +89,6 @@ function buttonClicked()
     //fadeOut anim has to fit in this time slot
     setTimeout(resetQuestionSection, 800, this);
     setTimeout(renderNewQuestionSection, 1500, ++questionCnt);
-    setQuizSectionHeight();
 }
 
 function toggleFade()

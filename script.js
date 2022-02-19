@@ -1,20 +1,34 @@
-//TODO Feedback, welche Frage ist richtig, wenn falsch ausgewählt
-
 const quiz_data = [
     {
-        "question": "Frage",
-        "answer_1": "A: Aaal",
-        "answer_2": "B: Brot",
-        "answer_3": "C: Chris",
-        "answer_4": "D: Draußen",
-        "rightAnswer": "answer_2"
+        "question": "Welches Gas ist hauptverantwortlich für den Treibhauseffekt?",
+        "answer_1": "Wasserstoff",
+        "answer_2": "Helium",
+        "answer_3": "Kohlenstoffdioxid",
+        "answer_4": "Propan",
+        "rightAnswer": "answer_3"
     },
     {
-        "question": "FrageFrage",
-        "answer_1": "A: Augen",
-        "answer_2": "B: Bötchen",
-        "answer_3": "C: Claus",
-        "answer_4": "D: Drüsen",
+        "question": "Welcher Sektor verursacht in Deutschland am Meisten CO2?",
+        "answer_1": "Verkehr",
+        "answer_2": "Landwirtschaft",
+        "answer_3": "Industrie",
+        "answer_4": "Energiewirtschaft",
+        "rightAnswer": "answer_4"
+    },
+    {
+        "question": "Welches Konsumgut in Kilo verbraucht am wenigsten Wasser?",
+        "answer_1": "Milch",
+        "answer_2": "Röstkaffee",
+        "answer_3": "T-Shirts",
+        "answer_4": "Reis",
+        "rightAnswer": "answer_1"
+    },
+    {
+        "question": "Wie viele Buchen braucht es um den jährlich durchschnittlichen CO2 Ausstoß eines Deutschen auszugleichen?",
+        "answer_1": "40-60",
+        "answer_2": "170-220",
+        "answer_3": "800-900",
+        "answer_4": "560-600",
         "rightAnswer": "answer_3"
     }
 ]

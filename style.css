@@ -1,3 +1,7 @@
+:root {
+    --navbar-height: 10vh;
+}
+
 body {
     margin: 0;
     font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
@@ -101,8 +105,7 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 10vh;
-    /*width: 98vw;*/
+    height: var(--navbar-height);
     margin: 1vw 1vw;
     border-radius: 20px;
     box-shadow: 1px 1px 3px rgb(44, 44, 44);
@@ -160,6 +163,11 @@ footer {
 #content-info {
     display: flex;
     flex-direction: column;
+    padding-top: var(--navbar-height);
+}
+
+#filler {
+    min-height: var(--navbar-height);
 }
 
 #content-quiz {
