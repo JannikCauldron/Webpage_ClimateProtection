@@ -5,7 +5,8 @@
 body {
     margin: 0;
     font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
-    background: linear-gradient(100deg, #beffb9 0%,  rgb(78, 255, 72) 100%);
+    background: linear-gradient(110deg, #fcfcfc 20%,  rgb(169, 255, 166) 100%);
+    /*background: linear-gradient(100deg, #beffb9 0%,  rgb(78, 255, 72) 100%);*/
 }
 
 footer {
@@ -95,7 +96,7 @@ footer {
 
 @keyframes highlight_button {
     to {
-        background-color:  #e0f53b;
+        background-color:  #f1ff8a;
     }
 }
 
@@ -109,7 +110,7 @@ footer {
     margin: 1vw 1vw;
     border-radius: 20px;
     box-shadow: 1px 1px 3px rgb(44, 44, 44);
-    background: linear-gradient(20deg, #41ff2e 0%,  #2eaa22 100%);
+    background: linear-gradient(20deg, #8ff2ff 0%,  #66ff58 70%);
 }
 
 #navbar-icon {
@@ -173,7 +174,7 @@ footer {
 #content-quiz {
     padding: 3%;
     border-radius: 5px;
-    background-color: rgba(218, 218, 218, .8);
+    background-color: #8ff2ffce;
 }
 
 #fade {

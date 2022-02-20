@@ -98,20 +98,20 @@ function toggleFade()
 
 function rightAnswerFeedback(button) {
     rightAnswerCnt++;
-    button.style["background-color"] = "green";
+    button.style["background-color"] = "rgb(80, 255, 80)";
 
-    setWordFeedback("RICHTIG", "green");
+    setWordFeedback("RICHTIG", "rgb(51, 200, 0)");
 }
 
 function wrongAnswerFeedback(button, correctAnswer) {
-    button.style["background-color"] = "red";
+    button.style["background-color"] = "rgb(255, 80, 80)";
     for (const but of buttons) {
         if (but.innerText == quiz_data[questionCnt][correctAnswer]) {
-            but.style["background-color"] = "green";
+            but.style["background-color"] = "rgb(80, 255, 80)";
         }
     }
 
-    setWordFeedback("FALSCH", "red");
+    setWordFeedback("FALSCH", "rgb(255, 80, 80)");
 }
 
 function setWordFeedback(word, color) {
