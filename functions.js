@@ -1,10 +1,10 @@
 function resetQuestionSection(button)
 {
+    button.classList.add("button-hover");
     for (const but of buttons)
     {
         but.style["background-color"] = "rgb(236, 236, 236)";
     }
-    button.classList.add("button-hover");
 }
 
 function renderNewQuestionSection(questionNumber) 
