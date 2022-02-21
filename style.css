@@ -47,9 +47,14 @@ footer {
     flex-direction: row-reverse;
 }
 
-.info-tile p {
+.info-tile-text-right{
     margin: 0;
-    padding: 0 5%;
+    padding: 0 2% 0 5%;
+}
+
+.info-tile-text-left{
+    margin: 0;
+    padding: 0 5% 0 2%;
 }
 
 .info-tile-img {
@@ -217,7 +222,6 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
     padding: 12% 0;
 }
 
@@ -249,6 +253,14 @@ footer {
         font-size: 10pt;
     }
 
+    .answer-group button {
+        width: 30vw;
+    }
+
+    #navbar {
+        margin: 2vw 2vw;
+    }
+
     #navbar-links-group {
         width: 50vw;
     }
@@ -261,6 +273,11 @@ footer {
 
     footer {
         font-size: 10pt;
+    }
+
+    #navbar-links-group {
+        width: 50vw;
+        margin: 0 6vw;
     }
 
     .navbar-links {
@@ -278,7 +295,7 @@ footer {
     }
 
     .answer-group button {
-        width: 30vw;
+        width: 40vw;
     }
 
     #quiz-answer {
